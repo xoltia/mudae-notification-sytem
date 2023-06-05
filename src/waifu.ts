@@ -45,11 +45,11 @@ export interface IWaifu {
 
 const VALUE_REGEX = /\*\*(?<value>[0-9]+)\*\*/;
 
-export function arrayContainsStringPrefix(
+export function arrsyContainsSubstring(
   array: string[],
-  prefix: string
+  substr: string
 ): boolean {
-  return array.some(item => item.startsWith(prefix));
+  return array.some((str) => str.trim().toLowerCase().includes(substr.toLowerCase()));
 }
 
 export function tryParseWaifu(message: IMessage): IWaifu | null {
@@ -112,7 +112,7 @@ export default class Waifu implements IWaifu {
   }
 
   checkSeries(series: string[]): boolean {
-    return arrayContainsStringPrefix(series, this.series);
+    return arrsyContainsSubstring(series, this.series);
   }
 
   static tryParse(message: IMessage): Waifu | null {
